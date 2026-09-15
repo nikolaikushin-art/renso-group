@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Renso Group CRM</title>
+    <meta
+      name="description"
+      content="Renso Group CRM — commercial intelligence platform for trading: customers, suppliers, pricing intelligence, quotations, KYC and AI extraction."
+    />
+    <meta name="theme-color" content="#0B2B47" />
+
+    <meta property="og:title" content="Renso Group CRM" />
+    <meta
+      property="og:description"
+      content="London-based trading CRM with supplier pricing intelligence and AI commercial extraction."
+    />
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=2" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=2" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2" />
+    <link rel="mask-icon" href="/mask-icon.svg?v=2" color="#0B2B47" />
+    <link rel="manifest" href="/site.webmanifest?v=2" />
+
+    <!--
+      Apply the saved theme before the first paint. React can't do this — by the
+      time the bundle has parsed and mounted, a light-mode user has already been
+      shown a frame of navy. Kept deliberately tiny and dependency-free; the
+      provider in src/lib/theme.tsx owns the value from then on.
+    -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("renso.web.theme");
+          var theme =
+            stored === "light" || stored === "dark"
+              ? stored
+              : window.matchMedia &&
+                  window.matchMedia("(prefers-color-scheme: light)").matches
+                ? "light"
+                : "dark";
+          document.documentElement.setAttribute("data-theme", theme);
+          document.documentElement.style.colorScheme = theme;
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

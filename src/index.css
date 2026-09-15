@@ -1,0 +1,742 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Renso Group CRM — calm, high-contrast navy and neutral design system. */
+
+@layer base {
+  :root,
+  :root[data-theme="dark"] {
+    --canvas: 10 10 12;
+    --surface: 23 23 27;
+    --surface-elevated: 31 31 36;
+    --text-primary: 245 245 240;
+    --text-secondary: 139 139 144;
+    --text-tertiary: 94 94 100;
+    --accent: 90 148 205;
+    --accent-deep: 11 43 71;
+    --divider: 42 42 46;
+    --success: 48 173 94;
+    --warning: 168 148 96;
+    --info: 61 126 196;
+    --tile-neutral: 74 74 82;
+  }
+
+  :root[data-theme="light"] {
+    --canvas: 242 242 245;
+    --surface: 255 255 255;
+    --surface-elevated: 235 235 240;
+    --text-primary: 16 16 20;
+    --text-secondary: 102 102 110;
+    --text-tertiary: 148 148 156;
+    --accent: 11 43 71;
+    --accent-deep: 11 43 71;
+    --divider: 221 221 226;
+    --success: 22 122 63;
+    --warning: 120 104 66;
+    --info: 31 95 168;
+    --tile-neutral: 100 106 120;
+  }
+
+  :root {
+    --background: var(--canvas);
+    --foreground: var(--text-primary);
+    --card: var(--surface);
+    --card-foreground: var(--text-primary);
+    --popover: var(--surface);
+    --popover-foreground: var(--text-primary);
+    --primary: var(--accent);
+    --primary-foreground: 255 255 255;
+    --secondary: var(--surface-elevated);
+    --secondary-foreground: var(--text-primary);
+    --muted: var(--surface-elevated);
+    --muted-foreground: var(--text-secondary);
+    --accent-muted: var(--surface-elevated);
+    --destructive: 90 148 205;
+    --destructive-foreground: 255 255 255;
+    --border: var(--divider);
+    --input: var(--divider);
+    --ring: var(--accent);
+    --radius: 0.875rem;
+  }
+
+  * {
+    border-color: rgb(var(--divider));
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-[rgb(var(--canvas))] text-[rgb(var(--text-primary))];
+    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+      "SF Pro Display", "Segoe UI", sans-serif;
+    font-feature-settings: "ss01", "cv11", "calt";
+    letter-spacing: -0.011em;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: rgb(var(--accent) / 0.25);
+  }
+}
+
+@layer components {
+  /* Renso card language */
+  .brand-card,
+  .renso-card {
+    background-color: rgb(var(--surface));
+    border: 1px solid rgb(var(--divider));
+    border-radius: 1rem;
+  }
+
+  .brand-underline {
+    width: 28px;
+    height: 2px;
+    border-radius: 999px;
+    background: rgb(var(--accent));
+  }
+
+  .brand-pill {
+    border-radius: 999px;
+    background: rgb(var(--surface-elevated));
+    transition: background-color 0.14s ease, color 0.14s ease;
+  }
+
+  .brand-pill[data-active="true"] {
+    background: rgb(var(--accent));
+    color: #fff;
+  }
+
+  .brand-focus:focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 2px;
+  }
+
+  .row-hover {
+    transition: background-color 0.14s ease, border-color 0.14s ease;
+  }
+
+  @media (hover: hover) {
+    .row-hover:hover {
+      background-color: rgb(var(--surface-elevated) / 0.6);
+    }
+  }
+
+  .card-hover,
+  .renso-card-hover,
+  .brand-card-hover {
+    transition: transform 0.16s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.16s ease,
+      box-shadow 0.16s ease, background-color 0.16s ease;
+  }
+
+  @media (hover: hover) {
+    .card-hover:hover,
+    .renso-card-hover:hover,
+    .brand-card-hover:hover {
+      transform: translateY(-1px);
+      border-color: rgb(var(--text-tertiary) / 0.5);
+      box-shadow: 0 6px 20px -8px rgb(0 0 0 / 0.45);
+    }
+  }
+
+  .card-hover:active,
+  .renso-card-hover:active,
+  .brand-card-hover:active {
+    transform: translateY(0) scale(0.99);
+    transition-duration: 0.08s;
+  }
+
+  .renso-glass {
+    background: rgb(var(--surface) / 0.88);
+    backdrop-filter: saturate(160%) blur(16px);
+    -webkit-backdrop-filter: saturate(160%) blur(16px);
+  }
+
+  .renso-metric {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.03em;
+  }
+
+  .nav-active {
+    background: rgb(var(--surface-elevated));
+    color: rgb(var(--text-primary));
+    position: relative;
+  }
+
+  .nav-active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 20%;
+    bottom: 20%;
+    width: 3px;
+    border-radius: 0 2px 2px 0;
+    background: rgb(var(--accent));
+  }
+
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      rgb(var(--surface-elevated)) 25%,
+      rgb(var(--surface-elevated) / 0.55) 37%,
+      rgb(var(--surface-elevated)) 63%
+    );
+    background-size: 400% 100%;
+    animation: brand-sweep 1.4s ease infinite;
+    border-radius: 8px;
+  }
+
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 1.5rem;
+    color: rgb(var(--text-secondary));
+  }
+}
+
+@layer utilities {
+  .thin-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--surface-elevated)) transparent;
+  }
+  .thin-scroll::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .thin-scroll::-webkit-scrollbar-thumb {
+    background-color: rgb(var(--surface-elevated));
+    border-radius: 999px;
+  }
+  .thin-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@keyframes brand-rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes brand-sweep {
+  from {
+    background-position: 100% 50%;
+  }
+  to {
+    background-position: 0 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* Theme-aware logo swap */
+:root[data-theme="dark"] .light-only { display: none !important; }
+:root[data-theme="light"] .dark-only { display: none !important; }
+:root:not([data-theme]) .light-only { display: none !important; }
+
+.brand-pressable:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+/*
+ * Baseline tactile feedback for every native <button> in the app, so raw
+ * buttons that don't opt into `.brand-pressable` or the shared `<Button>`
+ * component (which already define their own :active state and take
+ * precedence via class specificity) still get a native, iOS-style press
+ * response instead of feeling inert.
+ */
+button:not(:disabled) {
+  transition: transform 0.1s ease, opacity 0.1s ease;
+}
+button:not(:disabled):active {
+  transform: scale(0.98);
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------------------- *
+ * Print — used by the invoice/quotation preview.
+ *
+ * Printing is the whole PDF pipeline: the browser's own print-to-PDF gives a
+ * correct, selectable, vector document with no server-side renderer to run or
+ * keep in sync with the on-screen layout. Everything that isn't the document
+ * itself is removed, and the sheet is flattened onto white so it doesn't burn
+ * a page of navy toner when the app is in dark mode.
+ * ---------------------------------------------------------------------- */
+@media print {
+  .no-print,
+  nav,
+  header.renso-glass {
+    display: none !important;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+  }
+
+  main {
+    overflow: visible !important;
+  }
+
+  .print-sheet {
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: #fff !important;
+    color: #101014 !important;
+    box-shadow: none !important;
+  }
+
+  /* Force document ink to print black regardless of the active theme. */
+  .print-sheet .text-ink,
+  .print-sheet .text-ink-secondary,
+  .print-sheet .text-ink-tertiary,
+  .print-sheet th,
+  .print-sheet td,
+  .print-sheet dt,
+  .print-sheet dd {
+    color: #101014 !important;
+  }
+
+  .print-sheet .text-accent {
+    color: #0b2b47 !important;
+  }
+
+  @page {
+    margin: 16mm;
+  }
+}
+
+/* ---------------------------------------------------------------------- *
+ * WhatsApp surface
+ *
+ * The chat pane deliberately steps outside the navy design system and uses
+ * WhatsApp's own palette — beige-and-white in light, near-black teal in dark —
+ * because the point of this module is that it should feel like the app the
+ * counterparty is actually typing into. App chrome (sidebar, headers, the
+ * linked-records rail) stays on Renso tokens, so the two never blur together.
+ *
+ * Both themes are defined, so the module follows the theme switch like
+ * everything else rather than being a hard-coded dark island.
+ * ---------------------------------------------------------------------- */
+:root,
+:root[data-theme="dark"] {
+  --wa-chat-bg: 11 20 26;
+  --wa-bubble-in: 32 44 51;
+  --wa-bubble-out: 0 92 75;
+  --wa-bubble-ink: 233 237 239;
+  --wa-meta: 141 150 154;
+  --wa-panel: 17 27 33;
+  --wa-header: 32 44 51;
+  --wa-divider: 39 53 61;
+  --wa-tick: 83 189 235;
+  --wa-accent: 0 168 132;
+  --wa-doodle: 255 255 255;
+  --wa-doodle-opacity: 0.025;
+}
+
+:root[data-theme="light"] {
+  --wa-chat-bg: 239 231 222;
+  --wa-bubble-in: 255 255 255;
+  --wa-bubble-out: 217 253 211;
+  --wa-bubble-ink: 17 27 33;
+  --wa-meta: 102 119 126;
+  --wa-panel: 255 255 255;
+  --wa-header: 240 242 245;
+  --wa-divider: 225 226 227;
+  --wa-tick: 83 189 235;
+  --wa-accent: 0 168 132;
+  --wa-doodle: 0 0 0;
+  --wa-doodle-opacity: 0.03;
+}
+
+.wa-chat-bg {
+  background-color: rgb(var(--wa-chat-bg));
+  /* Stand-in for the WhatsApp doodle wallpaper: no bitmap to ship, no licence
+     question, and it tints correctly in both themes because it's drawn from a
+     token rather than baked into an image. */
+  background-image:
+    radial-gradient(
+      circle at 18% 22%,
+      rgb(var(--wa-doodle) / var(--wa-doodle-opacity)) 0 2px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 72% 58%,
+      rgb(var(--wa-doodle) / var(--wa-doodle-opacity)) 0 2px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 44% 82%,
+      rgb(var(--wa-doodle) / var(--wa-doodle-opacity)) 0 1.5px,
+      transparent 2px
+    );
+  background-size: 180px 180px, 240px 240px, 140px 140px;
+}
+
+.wa-panel { background-color: rgb(var(--wa-panel)); }
+.wa-header { background-color: rgb(var(--wa-header)); }
+.wa-divider { border-color: rgb(var(--wa-divider)); }
+.wa-meta { color: rgb(var(--wa-meta)); }
+.wa-tick-read { color: rgb(var(--wa-tick)); }
+.wa-accent-bg { background-color: rgb(var(--wa-accent)); }
+.wa-accent-ink { color: rgb(var(--wa-accent)); }
+
+/* Bubbles. The tail is a CSS triangle rather than an SVG sprite so it takes the
+   bubble colour automatically in both themes. */
+.wa-bubble {
+  position: relative;
+  max-width: min(78%, 34rem);
+  border-radius: 8px;
+  padding: 6px 9px 8px 9px;
+  color: rgb(var(--wa-bubble-ink));
+  box-shadow: 0 1px 0.5px rgb(0 0 0 / 0.13);
+  word-break: break-word;
+}
+
+.wa-bubble-in {
+  background-color: rgb(var(--wa-bubble-in));
+  border-top-left-radius: 0;
+}
+
+.wa-bubble-out {
+  background-color: rgb(var(--wa-bubble-out));
+  border-top-right-radius: 0;
+}
+
+.wa-bubble-in::before,
+.wa-bubble-out::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+}
+
+.wa-bubble-in::before {
+  left: -8px;
+  border-right: 9px solid rgb(var(--wa-bubble-in));
+}
+
+.wa-bubble-out::before {
+  right: -8px;
+  border-left: 9px solid rgb(var(--wa-bubble-out));
+}
+
+/* Stacked messages from the same side lose the tail, exactly as WhatsApp does. */
+.wa-bubble-tailless::before { display: none; }
+.wa-bubble-tailless.wa-bubble-in { border-top-left-radius: 8px; }
+.wa-bubble-tailless.wa-bubble-out { border-top-right-radius: 8px; }
+
+.wa-day-chip {
+  background-color: rgb(var(--wa-bubble-in));
+  color: rgb(var(--wa-meta));
+  border-radius: 8px;
+  padding: 5px 12px;
+  font-size: 12px;
+  box-shadow: 0 1px 0.5px rgb(0 0 0 / 0.13);
+}
+
+/* Quoted reply strip inside a bubble. */
+.wa-quote {
+  border-left: 4px solid rgb(var(--wa-accent));
+  background: rgb(0 0 0 / 0.14);
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+:root[data-theme="light"] .wa-quote {
+  background: rgb(0 0 0 / 0.05);
+}
+
+/* Typing indicator dots. */
+.wa-typing-dot {
+  animation: wa-typing 1.2s infinite ease-in-out;
+}
+.wa-typing-dot:nth-child(2) { animation-delay: 0.16s; }
+.wa-typing-dot:nth-child(3) { animation-delay: 0.32s; }
+
+@keyframes wa-typing {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-2px); }
+}
+
+/* ---------------------------------------------------------------------- *
+ * iOS surface language
+ *
+ * Roni's feedback was that the modules read as generic web tables. The fix
+ * isn't more colour — it's the structural grammar iOS uses: inset grouped
+ * lists, hairline separators that start at the text and not the card edge,
+ * tinted (not saturated) status pills, and controls that are either filled,
+ * tinted, or plain with nothing in between.
+ *
+ * The orange "21 days left" pill is gone. Apple doesn't use orange for a
+ * countdown; it uses a tinted grey until something is actually wrong, then
+ * red. These tokens encode that.
+ * ---------------------------------------------------------------------- */
+:root,
+:root[data-theme="dark"] {
+  --danger: 255 69 58;
+  --caution: 154 154 162;
+  --fill-primary: 120 120 128;
+  --fill-opacity-1: 0.2;
+  --fill-opacity-2: 0.16;
+  --separator: 84 84 88;
+  --separator-opacity: 0.55;
+}
+
+:root[data-theme="light"] {
+  --danger: 215 45 40;
+  --caution: 104 104 112;
+  --fill-primary: 120 120 128;
+  --fill-opacity-1: 0.12;
+  --fill-opacity-2: 0.08;
+  --separator: 60 60 67;
+  --separator-opacity: 0.29;
+}
+
+/* Inset grouped list — the iOS Settings/Contacts card. */
+.ios-group {
+  background-color: rgb(var(--surface));
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgb(var(--divider));
+}
+
+/* Separators inset to the content, not the card edge — the single detail
+   that makes a list read as iOS rather than as a table. */
+.ios-row + .ios-row {
+  border-top: 1px solid rgb(var(--separator) / var(--separator-opacity));
+}
+
+.ios-row-inset + .ios-row-inset {
+  border-top: 1px solid rgb(var(--separator) / var(--separator-opacity));
+  margin-left: 52px;
+}
+
+.ios-fill {
+  background-color: rgb(var(--fill-primary) / var(--fill-opacity-1));
+}
+
+.ios-fill-soft {
+  background-color: rgb(var(--fill-primary) / var(--fill-opacity-2));
+}
+
+/* Tinted pill: the colour is carried at low alpha with full-strength ink,
+   which is how iOS renders every status chip. */
+.ios-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 999px;
+  padding: 3px 9px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.ios-pill-neutral {
+  background: rgb(var(--fill-primary) / var(--fill-opacity-1));
+  color: rgb(var(--text-secondary));
+}
+.ios-pill-accent {
+  background: rgb(var(--accent) / 0.16);
+  color: rgb(var(--accent));
+}
+.ios-pill-success {
+  background: rgb(var(--success) / 0.16);
+  color: rgb(var(--success));
+}
+.ios-pill-danger {
+  background: rgb(var(--danger) / 0.16);
+  color: rgb(var(--danger));
+}
+.ios-pill-caution {
+  background: rgb(var(--caution) / 0.18);
+  color: rgb(var(--caution));
+}
+
+:root[data-theme="light"] .ios-pill-accent { background: rgb(var(--accent) / 0.1); }
+
+/* Segmented control — the sliding iOS selector. */
+.ios-segment {
+  display: flex;
+  padding: 2px;
+  border-radius: 9px;
+  background: rgb(var(--fill-primary) / var(--fill-opacity-2));
+}
+
+.ios-segment-item {
+  flex: 1;
+  border-radius: 7px;
+  padding: 6px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgb(var(--text-secondary));
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.ios-segment-item[data-active="true"] {
+  background: rgb(var(--surface));
+  color: rgb(var(--text-primary));
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.2);
+}
+
+/* Large title that shrinks into the nav bar, as on iOS. */
+.ios-large-title {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.028em;
+  line-height: 1.1;
+}
+
+.ios-section-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgb(var(--text-tertiary));
+}
+
+/* ---------------------------------------------------------------------- *
+ * Intelligence layer — signals, rings, capsules, scrubbers.
+ *
+ * Everything here is driven from the same tokens as the rest of the app, so
+ * the new surfaces follow the theme switch without a second palette.
+ * ---------------------------------------------------------------------- */
+
+/* Slow breathing halo behind a live indicator. Deliberately 2.4s and low
+   contrast: a fast, bright pulse is an alarm, and an alarm that is always on
+   is furniture. */
+@keyframes renso-pulse {
+  0%   { transform: scale(0.85); opacity: 0.55; }
+  70%  { transform: scale(1.9);  opacity: 0; }
+  100% { transform: scale(1.9);  opacity: 0; }
+}
+
+.renso-pulse {
+  animation: renso-pulse 2.4s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+
+/* Native range input, restyled. Kept native so keyboard stepping and
+   VoiceOver announcements survive. */
+.renso-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 999px;
+  background: rgb(var(--fill-primary) / 0.28);
+  outline: none;
+}
+
+.renso-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid rgb(0 0 0 / 0.12);
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.3);
+  cursor: grab;
+  transition: transform 0.12s ease;
+}
+
+.renso-range::-webkit-slider-thumb:active {
+  transform: scale(1.12);
+  cursor: grabbing;
+}
+
+.renso-range::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid rgb(0 0 0 / 0.12);
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.3);
+}
+
+/* Signal card. The left edge carries the severity so a scan down the page
+   reads as a severity profile before a single word is read. */
+.signal-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  background: rgb(var(--surface));
+  border: 1px solid rgb(var(--divider));
+  transition: transform 0.16s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.16s ease,
+    border-color 0.16s ease;
+}
+
+.signal-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: rgb(var(--signal-tone, var(--accent)));
+}
+
+@media (hover: hover) {
+  .signal-card:hover {
+    transform: translateY(-1px);
+    border-color: rgb(var(--signal-tone, var(--accent)) / 0.45);
+    box-shadow: 0 8px 24px -12px rgb(0 0 0 / 0.5);
+  }
+}
+
+/* Progressive blur under a sticky header: a gradient mask rather than a hard
+   edge, so content dissolves into the chrome the way it does on iOS. */
+.renso-fade-mask {
+  mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%);
+}
+
+/* Staggered entrance for a list of cards. Index is passed as a CSS variable so
+   one class covers any list length. */
+.renso-stagger {
+  animation: brand-rise 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 38ms);
+}
+
+/* Hairline grid behind a chart — visible enough to read a value against,
+   quiet enough to disappear when you aren't looking for it. */
+.renso-grid-lines {
+  background-image: repeating-linear-gradient(
+    to top,
+    rgb(var(--divider) / 0.7) 0 1px,
+    transparent 1px 25%
+  );
+}
